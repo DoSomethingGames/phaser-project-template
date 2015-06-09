@@ -7,3 +7,6 @@ obj/*
 *.sln
 *.suo
 .idea/*
+
+# Ignore compiled project output
+deploy/
