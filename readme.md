@@ -1,54 +1,40 @@
-## What is the Phaser Project Template?
+# Phaser Project Template
 
-This is a simple project template I created to help add structure and automation to your next [Phaser](http://phaser.io/) game. It includes the following things:
+This template is forked from https://github.com/gamecook/phaser-project-template. It provides a starting point for creating games with Phaser.
 
-*   A **package.json** for installing npm dependencies
-*   **GruntFile.js** for automating build tasks and compiling your game
-*   **src** folder where you can put your game code.
-*   **deploy** folder where all code gets compiled to and you can push to a server
+### Getting Started
 
-To get started all you need to do is download a <a target="_blank" href="https://github.com/gamecook/phaser-template-project">copy of this template</a>, the latest version of <a target="_blank" href="https://github.com/photonstorm/phaser">Phaser</a>, [NodeJS](http://nodejs.org) and [Grunt](http://gruntjs.com/).
+#### Install NodeJS and Grunt
 
-## Installing NodeJS and Grunt
+1. You can download NodeJS from its site: http://nodejs.org
+2. After installing it, you can install grunt from the command line with: `npm install -g grunt-cli`
 
-You can get a copy of NodeJS on its site <a target="_blank" href="http://nodejs.org/">here</a> and install it. After installing it you will want to install grunt from the command line.
+#### Setup Your Project
 
-Now you can install Grunt's command line tools by typing out the following:
+1. Fork this repository and clone it into your development environment
+2. From your project's root directory, install dependencies from the command line with: `npm install`. This will download all the dependencies in the package.json file and install them locally for you to use.
+3. Afterwards, from the command line, run: `grunt`. This will both package up your project into a `deploy/` folder, and open up a new browser window that will run the game.
 
-<pre lang="javascript">> npm install -g grunt-cli</pre>
+#### Development
 
-From here, Grunt should work via the command line. If you have never installed Node or Grunt, make sure you watch these two videos:
+This project is setup to use Phaser 2.3.0. This can be changed by adjusting the Phaser script loaded in [index.html](https://github.com/DoSomethingGames/phaser-project-template/blob/master/src/index.html#L8).
 
-* [Installing Git, NodeJS and PHP for Impact Game Dev Part 1](http://vimeo.com/78634968)
-* [Installing Git, NodeJS and PHP for Impact Game Dev Part 2](http://vimeo.com/78637475)
+All development should be able to take place within the **src/** folder. The Grunt steps will handle packaging it up to export to the **deploy/** folder.
 
-These two videos help walk you through how I have used Node and Grunt in the past with my other game starterkits. *Note: You will not need to install PHP for this project which is covered in these videos*.
+If the order in which your Javascript files load matters, then one possible solution is to specify their order in the Grunt concat step.
 
-
-## Setting up the Template's Dependencies
-
-Via the command line, navigate into the template directory's root and run the following command:
-
-<pre lang="javascript">> npm install</pre>
-
-This will download all the dependencies in the package.json file and install them locally for you to use. 
-
-<img border="0" width="624" id="Picture 1" src="http://jessefreeman.com/wp-content/uploads/2014/03/pt-install.png" />
-
-After that you can simply run the following:
-
-<pre lang="javascript">> grunt</pre>
-
-It will launch a browser with the default screen which will look something like this:
-
-<img border="0" width="624"id="Picture 3" src="http://jessefreeman.com/wp-content/uploads/2014/03/Phaser-Template.png" />
-
-You can start building a game with Phaser, simply modify the main.js file inside of the src/game directory. As long as you have the Grunt task running, your project will automatically recompile every time you make a change to any JavaScript file inside of the src directory. Once the project is recompiled, simply refresh your browser to see the changes. Also make sure you disable your browser's cache.
-
-## What Else?
-
-While I have included a version of Phaser to get you started, chances are very good that it is already out of date. Make sure you go to the Phaser github page and download the latest source code. Once you have that, simply copy the minified version of Phaser into the src/lib directory and replace the one that is currently there.
-
-<img border="0" width="333"id="Picture 3" src="http://jessefreeman.com/wp-content/uploads/2014/03/pt-src.png" />
-
-Also, if you are lost or need some point of reference I highly suggest going through <a target="_blank" href="http://gametest.mobi/phaser/">each of the tests</a> in the Phaser project to see how things work until more of the framework is documented.
+ex:
+```
+...
+concat: {
+  dist: {
+    src: [
+      'src/game/main.js',
+      'src/script1.js',
+      'src/script2.js',
+      'src/script3.js'
+    ],
+    dest: 'deploy/js/<%= pkg.name %>.js'
+  }
+},
+```
